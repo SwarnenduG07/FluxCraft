@@ -1,7 +1,13 @@
 "use client"
 
+import { Montserrat } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
+
+const montserrat = Montserrat({
+   weight: "600", subsets: ["latin"]
+})
 
 const SideBar = () =>{
     return (
@@ -11,8 +17,8 @@ const SideBar = () =>{
                    <div className="relative w-8 h-8 mr-4">
                     <Image fill alt="Logo" src="/logo.png"/>
                    </div>
-                   <h1 className="text-2xl font-bold">
-                      Flux-Craft
+                   <h1 className={cn("text-2xl font-bold", montserrat.className)}>
+                      FluxCraft
                    </h1>
                 </Link>
              </div>
