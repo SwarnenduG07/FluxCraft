@@ -48,7 +48,7 @@ const ConversationPage = () => {
                                                 {...field} // Bind field properties to the input
                                                 className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                                 disabled={isLoading}
-                                                placeholder="How do I calculate the radius of a circle"
+                                                placeholder="Generate a react Button Component ⇒"
                                             />
                                         </FormControl>
                                     </FormItem>
