@@ -7,6 +7,7 @@ import { useAuth } from "@clerk/nextjs"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { DarkModeToggle } from "./toggle"
 
 const font = Montserrat({
     weight: "600",
@@ -30,6 +31,7 @@ export const LandingNavBar = () => {
                </h1>
             </Link>
             <div className="flex items-center gap-x-2">
+                <DarkModeToggle />
               <Link href={isSignedIn? "/dashboard" : "/sign-up" }>
                 <Button variant={"outline"} className="rounded-full">
                        Get Started

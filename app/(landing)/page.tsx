@@ -1,3 +1,4 @@
+import { LandingContent } from "@/components/landingContent";
 import LandingHero from "@/components/landingHero";
 import LandingNavBar from "@/components/landingNavbar";
 
@@ -6,6 +7,7 @@ import LandingNavBar from "@/components/landingNavbar";
         <div className="h-full">
       <LandingNavBar />
       <LandingHero />
+      <LandingContent />
         </div>
      )
  }
