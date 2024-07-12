@@ -1,15 +1,21 @@
 "use client"
+import axios from "axios"
+import * as z from "zod"
+import { ChatCompletionRequestMessage } from "openai"
 import { Headings } from "@/components/headings"
 import { MessageSquare } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { formSchema } from "./constants"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 const ConversationPage = () => {
+    const router = useRouter();
+    const [messages, setMessages] = useState<ChatCompletionRequestMessage>([]);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -20,8 +26,14 @@ const ConversationPage = () => {
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
-    }
+        try {
+            
+        } catch (e: any) {
+            console.log(e);
+        } finally {
+            router.refresh();
+        }
+    };
 
     return (
         <div>
