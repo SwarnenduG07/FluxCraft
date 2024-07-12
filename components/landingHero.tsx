@@ -28,7 +28,7 @@ const LandingHero = () => {
                 </div>
             </div>
                 <div className="text-sm md:text-xl font-light text-zinc-400">
-                    Create Content useing AI 10X faster
+                    Create Content Useing AI 10X Faster
                 </div>
              <div>
                 <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
@@ -38,7 +38,7 @@ const LandingHero = () => {
                 </Link>
             </div>
             <div className="text-zinc-400 text-xs md:text-sm font-normal">
-                 No Card required
+                 No credit card required
             </div>
         </div>
     )
