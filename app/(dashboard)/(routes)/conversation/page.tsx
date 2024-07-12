@@ -77,7 +77,7 @@ const ConversationPage = () => {
                                     </FormItem>
                                 )}
                             />
-                           <Button className="col-span-2 lg:col-span-2 w-full" 
+                           <Button className="col-span-3 lg:col-span-2 w-full" 
                        
                            disabled={isLoading}>
                                  Genarate
