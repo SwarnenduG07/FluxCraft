@@ -48,7 +48,7 @@ const ConversationPage = () => {
                                                 {...field} // Bind field properties to the input
                                                 className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                                 disabled={isLoading}
-                                                placeholder="Generate a react Button Component ⇒"
+                                                placeholder="What is the distance of Earth from Sun ⇒"
                                             />
                                         </FormControl>
                                     </FormItem>
