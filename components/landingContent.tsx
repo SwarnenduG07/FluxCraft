@@ -9,7 +9,7 @@ const testimonials = [
         description: "This is the best application I am using now a days. This website works seamlessly",
     },
     {
-        name: "Swarnendu Ghosh",
+        name: "Nizzy",
         title: "Full-Stack Engineer",
         description: "I am using this in my daily life now. In terms of Frontend this looks really good",
     },
