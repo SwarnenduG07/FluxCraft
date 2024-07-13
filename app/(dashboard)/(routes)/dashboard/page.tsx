@@ -26,28 +26,28 @@ import { useRouter } from "next/navigation";
       icon: Music,
       color: "text-emerald-500",
       bgColor: "bg-emerald-500/10",
-      href: "/conversation",
+      href: "/music",
     },
     {
       lable: "Video Generation",
       icon: Video,
       color: "text-sky-500",
       bgColor: "bg-sky-500/10",
-      href: "/conversation",
+      href: "/video",
     },
     {
       lable: "Image Generation",
       icon: Image,
       color: "text-pink-500",
       bgColor: "bg-pink-500/10",
-      href: "/conversation",
+      href: "/video",
     },
     {
       lable: "Code Generation",
       icon: Code,
       color: "text-green-700",
       bgColor: "bg-green-500/10",
-      href: "/conversation",
+      href: "/code",
     }
   ]
   const DashboardPage = () => {
