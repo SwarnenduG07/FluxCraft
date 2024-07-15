@@ -11,11 +11,15 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-
+import { Empty } from "@/components/empty"
+import { Loader } from "@/components/loader"
+import { cn } from "@/lib/utils"
+import { UserAvater } from "@/components/user-avater"
+import { BotAvater } from "@/components/bot-avater"
 
 const ConversationPage = () => {
     const router = useRouter();
-    const [messages, setMessages] = useState<any>([]);
+    const [messages, setMessages] = useState<any[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -36,10 +40,10 @@ const ConversationPage = () => {
             const response = await axios.post("/api/conversation", {
                 messages: newMessages,
             })
-            setMessages((current: any) => [...current, userMessage, response.data]);
+            setMessages((current) => [...current, userMessage, response.data]);
            form.reset();
         } catch (e: any) {
-            //TODO: Open pro Model
+            //TODO: I will add premium model
             console.log(e);
         } finally {
             router.refresh();
@@ -86,10 +90,24 @@ const ConversationPage = () => {
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
+                    {isLoading && (
+                     <div className="p-8 rounded-lg w-full floex items-center justify-center bg-muted">
+                       <Loader />
+                        </div>
+                    )}
+                    {messages.length ===  0 && !isLoading && (
+                        <Empty label={"No Conversation Started"} />
+                    )}
                    <div className="flex flex-col-reverse gap-y-4">
-                    {messages.map((message: any) => (
-                        <div key={message.content}>
-                            {message.content}
+                    {messages.map((message) => (
+                        <div 
+                        key={message.content}
+                        className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10": "bg-muted")}
+                        >
+                            {message.role === "user" ? <UserAvater /> : <BotAvater />}
+                            <p className="text-sm">
+                              {message.content}
+                            </p>
                         </div>
                     ))}
                    </div>

@@ -29,7 +29,9 @@ Go to the project directory and do
  ```bash
 npm install
 ```
+
 ### Next Step
+
  Go to _*[.env.example]*_ 
  Replace your won API keys with existing one's
  
@@ -42,10 +44,10 @@ npm install
 
  Go to [`OPEEAI`](https://openai.com/)
 
- ## For Running the project
+## For Running the project
+
   ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
- 

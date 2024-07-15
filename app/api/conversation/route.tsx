@@ -26,13 +26,13 @@ export async function POST(req: Request, res: Response) {
 
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            messages,
+            messages 
         });
 
         return NextResponse.json(response.choices[0].message);
 
     } catch (e: any) {
-        console.log("Error:", e);
+        console.log("Error", e);
 
         if (e.response && e.response.status === 429) {
             return new NextResponse("Rate limit exceeded. Please check your OpenAI quota.", { status: 429 });
