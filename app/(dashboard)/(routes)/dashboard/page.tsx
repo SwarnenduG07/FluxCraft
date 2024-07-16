@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation";
       icon: Music,
       color: "text-emerald-500",
       bgColor: "bg-emerald-500/10",
-      href: "/pagenotfound",
+      href: "/music",
     },
     {
       lable: "Video Generation",
