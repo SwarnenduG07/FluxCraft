@@ -11,7 +11,7 @@ import { useEffect, useState } from "react"
 
     useEffect(() => {
         setIsMounted(true)
-    })
+    },[])
      
      if (!isMounted) {
         return null

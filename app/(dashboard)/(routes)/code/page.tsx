@@ -18,7 +18,7 @@ import { UserAvater } from "@/components/user-avater"
 import { BotAvater } from "@/components/bot-avater"
 import ReactMarkdown from "react-markdown";
 
-const codepage = () => {
+const Codepage = () => {
     const router = useRouter();
     const [messages, setMessages] = useState<any[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
@@ -129,4 +129,4 @@ const codepage = () => {
     )
 }
 
-export default codepage
+export default Codepage
