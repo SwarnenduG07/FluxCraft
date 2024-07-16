@@ -47,7 +47,7 @@ import { useRouter } from "next/navigation";
       icon: Code,
       color: "text-green-700",
       bgColor: "bg-green-500/10",
-      href: "/pagenotfound",
+      href: "/code",
     }
   ]
   const DashboardPage = () => {

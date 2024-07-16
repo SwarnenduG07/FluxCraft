@@ -1,7 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
-import { CreateChatCompletionRequestMessage } from "openai/resources/index.mjs";
 require("dotenv").config();
 
 const openai = new OpenAI({

@@ -4,7 +4,7 @@ import { Montserrat } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { Code, Code2Icon, CodeIcon, CodeSquare, CodeXmlIcon, ImageIcon, LayoutDashboard, LucideMusic2, LucideSettings2, MessageSquare, Music, Music2, Music3Icon, Music4Icon, Settings, Settings2, Settings2Icon, VideoIcon } from "lucide-react"
+import { Code, ImageIcon, LayoutDashboard,MessageSquare, Music4Icon, Settings, VideoIcon } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 const montserrat = Montserrat({
