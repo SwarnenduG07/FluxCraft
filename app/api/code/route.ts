@@ -33,7 +33,7 @@ export async function POST(req: Request, res: Response) {
         return NextResponse.json(response.choices[0].message);
 
     } catch (e: any) {
-        console.log("CODE_ERROR", e);
+        console.log("Code Error", e);
 
         if (e.response && e.response.status === 429) {
             return new NextResponse("Rate limit exceeded. Please check your OpenAI quota.", { status: 429 });
