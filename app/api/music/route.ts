@@ -21,12 +21,12 @@ export async function POST(req: Request, res: Response) {
         if (!prompt) {
             return new NextResponse("Prompt are required", { status: 400 });
         }
-        const output = await replicate.run("riffusion/riffusion:8cf61ea6c56afd61d8f5b9ffd14d7c216c0a93844ce2d82ac1c9ecc9c7f24e05", { 
+        const response = await replicate.run("riffusion/riffusion:8cf61ea6c56afd61d8f5b9ffd14d7c216c0a93844ce2d82ac1c9ecc9c7f24e05", { 
             input: {
                 prompt_a: prompt
             }
          });
-        console.log(output)
+        return NextResponse.json(response)
 
       
           
