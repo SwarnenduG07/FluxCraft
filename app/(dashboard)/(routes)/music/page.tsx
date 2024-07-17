@@ -13,13 +13,11 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Empty } from "@/components/empty"
 import { Loader } from "@/components/loader"
-import { cn } from "@/lib/utils"
-import { UserAvater } from "@/components/user-avater"
-import { BotAvater } from "@/components/bot-avater"
+
 
 const Music = () => {
     const router = useRouter();
-    const [messages, setMessages] = useState<any[]>([]);
+    const [music, setMusic] = useState<string>();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -31,16 +29,10 @@ const Music = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: any = {
-               role : "user",
-               content: values.prompt,
-            };
-            const newMessages = [...messages, userMessage];
+            setMusic(undefined);
 
-            const response = await axios.post("/api/conversation", {
-                messages: newMessages,
-            })
-            setMessages((current) => [...current, userMessage, response.data]);
+            const response = await axios.post("/api/music", values)
+            setMusic(response.data.audio)
            form.reset();
         } catch (e: any) {
             //TODO: I will add premium model
@@ -95,12 +87,14 @@ const Music = () => {
                        <Loader />
                         </div>
                     )}
-                    {messages.length ===  0 && !isLoading && (
-                        <Empty label={"No Conversation Started"} />
+                    { music && !isLoading && (
+                        <Empty label={"No Music Started"} />
                     )}
-                  <div className=" ">
-                       Music Will be generated
-                  </div>
+                   {music && (
+                       <audio controls className="w-full mt-8">
+                          <source src= {music}/>
+                       </audio>
+                   )}
                 </div>
             </div>
         </div>
