@@ -34,15 +34,20 @@ npm install
 
  Go to _*[.env.example]*_ 
  Replace your won API keys with existing one's
- 
- ### Replace
+
+### Replace
+
  CLERK_PUBLISHABLE_KEY &  CLERK_SECRET_KEY 
 
  Go to [`Clerk`](https://clerk.com/)
 
- OPENAI_API_KEY 
+ OPENAI_API_KEY
 
  Go to [`OPEEAI`](https://openai.com/)
+
+REPLICATE_API_TOKEN
+
+To to[`Replicate`](https://replicate.com/)
 
 ## For Running the project
 

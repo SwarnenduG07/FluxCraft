@@ -34,6 +34,6 @@ export async function POST(req: Request, res: Response) {
         return NextResponse.json({audio: response})
     } catch (e: any) {
         console.log("Music Error", e);
-        return new NextResponse("Internal errorr", { status: 500 });
+        return new NextResponse("Internal error", { status: 500 });
     }
 }
