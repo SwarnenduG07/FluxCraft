@@ -22,15 +22,16 @@ export async function POST(req: Request, res: Response) {
         if (!prompt) {
             return new NextResponse("Prompt are required", { status: 400 });
         }
-        const response = await replicate.run("riffusion/riffusion:8cf61ea6c56afd61d8f5b9ffd14d7c216c0a93844ce2d82ac1c9ecc9c7f24e05", { 
+        
+        const response = await replicate.run("meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb", { 
             input: {
-                prompt_a: prompt
+                prompt: prompt,
+                model_version: "stereo-large",
+                output_format: "mp3",
+                normalization_strategy: "peak"
             }
          });
-        return NextResponse.json(response)
-
-      
-          
+        return NextResponse.json({audio: response})
     } catch (e: any) {
         console.log("Music Error", e);
         return new NextResponse("Internal errorr", { status: 500 });

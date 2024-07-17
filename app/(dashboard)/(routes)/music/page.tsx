@@ -87,7 +87,7 @@ const Music = () => {
                        <Loader />
                         </div>
                     )}
-                    { music && !isLoading && (
+                    { !music && !isLoading && (
                         <Empty label={"No Music Started"} />
                     )}
                    {music && (
