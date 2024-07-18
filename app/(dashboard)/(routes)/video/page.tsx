@@ -88,12 +88,12 @@ const Videopage = () => {
                         </div>
                     )}
                     { !video && !isLoading && (
-                        <Empty label={"No Music Started"} />
+                        <Empty label={"No video Started"} />
                     )}
                    {video && (
-                       <audio controls className="w-full mt-8">
-                          <source src= {video}/>
-                       </audio>
+                       <video className="w-full aspect-video mt-8 border bg-black" controls>
+                        <source src={video}/>
+                       </video>
                    )}
                 </div>
             </div>
