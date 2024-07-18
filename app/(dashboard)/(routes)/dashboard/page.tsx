@@ -33,7 +33,7 @@ import { useRouter } from "next/navigation";
       icon: Video,
       color: "text-sky-500",
       bgColor: "bg-sky-500/10",
-      href: "/pagenotfound",
+      href: "/video",
     },
     {
       lable: "Image Generation",

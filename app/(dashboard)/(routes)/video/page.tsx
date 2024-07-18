@@ -2,7 +2,7 @@
 import axios from "axios"
 import * as z from "zod"
 import { Headings } from "@/components/headings"
-import { MessageSquare, MusicIcon } from "lucide-react"
+import { MessageSquare, MusicIcon, VideoIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { formSchema } from "./constants"
@@ -15,9 +15,9 @@ import { Empty } from "@/components/empty"
 import { Loader } from "@/components/loader"
 
 
-const Music = () => {
+const Videopage = () => {
     const router = useRouter();
-    const [music, setMusic] = useState<string>();
+    const [video, setVideo] = useState<string>();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -29,13 +29,13 @@ const Music = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            setMusic(undefined);
+            setVideo(undefined);
 
-            const response = await axios.post("/api/music", values)
-            setMusic(response.data.audio)
+            const response = await axios.post("/api/video", values)
+            setVideo(response.data.audio)
            form.reset();
         } catch (e: any) {
-            //TODO: I will have to add premium model
+            //TODO: I will add premium model
             console.log(e);
         } finally {
             router.refresh();
@@ -45,11 +45,11 @@ const Music = () => {
     return (
         <div>
             <Headings 
-                title="Music Generation"
-                description="Our Most Advanced Music Generator"
-                icon={MusicIcon}
-                iconColor="text-emerald-500"
-                bgColor="bg-emerald-500/10"
+                title="Video Generation"
+                description="Our Most Advanced Videp Generator"
+                icon={VideoIcon}
+                iconColor="text-sky-500"
+                bgColor="bg-sky-500/10"
             />
             <div className="px-4 lg:px-8">
                 <div>
@@ -67,7 +67,7 @@ const Music = () => {
                                                 {...field} // Bind field properties to the input
                                                 className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                                 disabled={isLoading}
-                                                placeholder="Piano Solo⇒"
+                                                placeholder="Clown fish swimming around a coral reef ⇒"
                                             />
                                         </FormControl>
                                     </FormItem>
@@ -87,12 +87,12 @@ const Music = () => {
                        <Loader />
                         </div>
                     )}
-                    { !music && !isLoading && (
+                    { !video && !isLoading && (
                         <Empty label={"No Music Started"} />
                     )}
-                   {music && (
+                   {video && (
                        <audio controls className="w-full mt-8">
-                          <source src= {music}/>
+                          <source src= {video}/>
                        </audio>
                    )}
                 </div>
@@ -101,4 +101,4 @@ const Music = () => {
     )
 }
 
-export default Music
+export default Videopage
