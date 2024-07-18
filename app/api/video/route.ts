@@ -23,17 +23,19 @@ export async function POST(req: Request, res: Response) {
             return new NextResponse("Prompt are required", { status: 400 });
         }
         
-        const response = await replicate.run("meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb", { 
+        const response = await replicate.run("anotherjesse/zeroscope-v2-xl:9f747673945c62801b13b84701c783929c0ee784e4748ec062204894dda1a351", { 
             input: {
-                prompt: prompt,
-                model_version: "stereo-large",
-                output_format: "mp3",
-                normalization_strategy: "peak"
+                    fps: 24,
+                    width: 1024,
+                    height: 576,
+                    prompt: prompt,
+                    guidance_scale: 17.5,
+                    negative_prompt: "very blue, dust, noisy, washed out, ugly, distorted, broken"
             }
          });
-        return NextResponse.json({audio: response})
+        return NextResponse.json(response)
     } catch (e: any) {
-        console.log("Music Error", e);
+        console.log("Video Error", e);
         return new NextResponse("Internal error", { status: 500 });
     }
 }
