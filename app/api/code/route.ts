@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
 require("dotenv").config();
-
+import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || "",
 });
@@ -22,6 +22,11 @@ export async function POST(req: Request, res: Response) {
         if (!messages) {
             return new NextResponse("Messages are required", { status: 400 });
         }
+        const free = await checkApiLimit()
+
+        if  (!free) {
+            return new NextResponse("Feww trial has expired", { status: 403 });
+        }
 
         const response = await openai.chat.completions.create({
             messages: [{ role: "system", 
@@ -29,6 +34,8 @@ export async function POST(req: Request, res: Response) {
             }],
             model: "gpt-3.5-turbo",
         });
+         
+        await increseApiLimit()
 
         return NextResponse.json(response.choices[0].message);
 

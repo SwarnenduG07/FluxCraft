@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 require("dotenv").config();
 import { google } from "@ai-sdk/google"
 import { generateText } from 'ai';
-
+import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
 
 export async function POST(req: Request, res: Response) {
     try {
@@ -19,6 +19,12 @@ export async function POST(req: Request, res: Response) {
         if (!messages) {
             return new NextResponse("Messages are required", { status: 400 });
         }
+        
+        const free = await checkApiLimit()
+
+        if  (!free) {
+            return new NextResponse("Feww trial has expired", { status: 403 });
+        }
 
         const response = await generateText({
             model: google('models/gemini-1.5-flash-latest'),
@@ -26,6 +32,8 @@ export async function POST(req: Request, res: Response) {
                 content: "You are a chatbot.Your answers should be precise & and simple. so that everyon can " , ...messages
             }],
           });
+          await increseApiLimit();
+
           return NextResponse.json(response);
     } catch (e: any) {
         console.log("Conversation Error", e);
