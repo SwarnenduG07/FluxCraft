@@ -24,7 +24,7 @@ import { useEffect, useState } from "react"
              </Button>
         </SheetTrigger>  
         <SheetContent side="left" className="p-0">
-            <SideBar />
+            <SideBar apiLimitCount={0} />
         </SheetContent> 
       </Sheet>
    )

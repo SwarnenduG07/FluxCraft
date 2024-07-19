@@ -2,7 +2,9 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
 require("dotenv").config();
+
 import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
+
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || "",
 });
@@ -22,6 +24,7 @@ export async function POST(req: Request, res: Response) {
         if (!messages) {
             return new NextResponse("Messages are required", { status: 400 });
         }
+        
         const free = await checkApiLimit()
 
         if  (!free) {
