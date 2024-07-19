@@ -16,8 +16,10 @@ import { Loader } from "@/components/loader"
 import { cn } from "@/lib/utils"
 import { UserAvater } from "@/components/user-avater"
 import { BotAvater } from "@/components/bot-avater"
+import { useProModel } from "@/app/hooks/use-pro-model"
 
 const ConversationPage = () => {
+    const proModel = useProModel()
     const router = useRouter();
     const [messages, setMessages] = useState<any[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
@@ -43,8 +45,10 @@ const ConversationPage = () => {
             setMessages((current) => [...current, userMessage, response.data]);
            form.reset();
         } catch (e: any) {
-            //TODO: I will add premium model
-            console.log(e);
+           if(e?.response?.status === 403)  {
+                proModel.onOpen();
+           } 
+           
         } finally {
             router.refresh();
         }

@@ -13,9 +13,11 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Empty } from "@/components/empty"
 import { Loader } from "@/components/loader"
+import { useProModel } from "@/app/hooks/use-pro-model"
 
 
 const Music = () => {
+    const proModel = useProModel()
     const router = useRouter();
     const [music, setMusic] = useState<string>();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -35,8 +37,9 @@ const Music = () => {
             setMusic(response.data.audio)
            form.reset();
         } catch (e: any) {
-            //TODO: I will have to add premium model
-            console.log(e);
+            if(e?.response?.status === 403)  {
+                proModel.onOpen();
+           } 
         } finally {
             router.refresh();
         }
