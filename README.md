@@ -53,28 +53,9 @@ STRIP API TOKEN & STRIPE_WEBHOOK_SECRET
 
 Go to [`Strip`](https://stripe.com/in)
 
-Then Create an account and get a API key and replace this with STRIPE_API_KEY then go to webhook and download the strip-cli and run it  
-
-```bash
-stripe login
-```
-
-in your terminal and do then 
-
-```bash
-stripe listen --forward-to localhost:3000/api/webhook
-```
-
- in webhook section and it in your terminal you will get something like this 
-
-```bash
-[whsec_97347152fae0xxxxxx823xxb1707d0b4aaa1794a5abf9c1sdkjh17]
-```
-
-put this in your STRIPE_WEBHOOK_SECRET
-
 ## How to Download strip-cli
-In WINDOWS 
+
+In WINDOWS
 we will use [`Scoop`](https://scoop.sh/) to install it so
 
 Open PowerShell and pest this command to install scoop
@@ -98,6 +79,26 @@ This will install Strip-cli
 
  Visit this [`Strip-cli`](https://docs.stripe.com/stripe-cli)
  and install this
+
+Then Create an account and get a API key and replace this with STRIPE_API_KEY then go to webhook and download the strip-cli and run it  
+
+```bash
+stripe login
+```
+
+In your terminal and do then
+
+```bash
+stripe listen --forward-to localhost:3000/api/webhook
+```
+
+ in webhook section and it in your terminal you will get something like this 
+
+```bash
+[whsec_97347152fae0xxxxxx823xxb1707d0b4aaa1794a5abf9c1sdkjh17]
+```
+
+put this in your STRIPE_WEBHOOK_SECRET
 
 ## For Running the project
 
