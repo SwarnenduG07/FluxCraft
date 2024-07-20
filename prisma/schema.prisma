@@ -19,7 +19,7 @@ model userAPI {
 model UserSubscription {
   id                     String    @id @default(cuid())
   userId                 String    @unique
-  striptCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripCustomerId        String?   @unique @map(name: "stripe_customer_id")
   stripeSubcriptionId    String?   @unique @map(name: "stripe_subcription_id")
   stripePriceId          String?   @map(name:"stripe_price_id")
   stripeCurrentPeriodEnd DateTime? @map(name:"stripe_current_period_end")
