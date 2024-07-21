@@ -5,7 +5,7 @@ require("dotenv").config();
 import { google } from "@ai-sdk/google"
 import { generateText } from 'ai';
 import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
-import { checkSubscribtion } from "@/lib/subscription";
+import { checkSubscription } from "@/lib/subscription";
 export async function POST(req: Request, res: Response) {
     try {
         const { userId } = auth();
@@ -21,7 +21,7 @@ export async function POST(req: Request, res: Response) {
         }
         
         const free = await checkApiLimit()
-        const isPro = checkSubscribtion();
+        const isPro = checkSubscription();
 
         if  (!free && !isPro) {
             return new NextResponse("Free trial has expired", { status: 403 });

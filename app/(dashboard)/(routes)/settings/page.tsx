@@ -1,11 +1,11 @@
 import { Headings } from "@/components/headings"
 import { SubsccriptionButton } from "@/components/subscription-button";
-import { checkSubscribtion } from "@/lib/subscription"
+import { checkSubscription } from "@/lib/subscription"
 import { Settings } from "lucide-react"
 
-export const Setting = async () => {
-const isPro = await checkSubscribtion();
-     
+const SettingsPage = async () => {
+const isPro = await checkSubscription();
+
     return (
         <div>
             <Headings 
@@ -20,4 +20,4 @@ const isPro = await checkSubscribtion();
         </div>
     )
 }
-export default Setting
+export default SettingsPage

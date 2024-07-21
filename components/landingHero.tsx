@@ -28,7 +28,7 @@ const LandingHero = () => {
                 </div>
             </div>
                 <div className="text-sm md:text-xl font-light text-zinc-400">
-                    Create Content Useing AI 10X Faster
+                    Create Content Using AI 10X Faster
                 </div>
              <div>
                 <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>

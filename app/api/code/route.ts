@@ -4,7 +4,7 @@ import { OpenAI } from "openai";
 require("dotenv").config();
 
 import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
-import { checkSubscribtion } from "@/lib/subscription";
+import { checkSubscription } from "@/lib/subscription";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || "",
@@ -27,7 +27,7 @@ export async function POST(req: Request, res: Response) {
         }
         
         const free = await checkApiLimit()
-        const isPro = checkSubscribtion();
+        const isPro = checkSubscription();
 
         if  (!free && !isPro) {
             return new NextResponse("Free trial has expired", { status: 403 });

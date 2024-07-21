@@ -8,10 +8,26 @@ import { Card } from "./ui/card"
 import { cn } from "@/lib/utils"
 import { Check, Zap } from "lucide-react"
 import { Button } from "./ui/button"
+import axios from "axios"
+import { useState } from "react"
 
 
 export const Promodel = () => {
     const proModel = useProModel()
+    const [loding, setLoding] = useState(false)
+
+   const onSubscribe = async () => {
+     try {
+        setLoding(true)
+         const response = await axios.get("/api/stripe")
+         window.location.href = response.data.url
+     } catch (e) {
+        console.log(e,"STRIPE_ERROR");
+     } finally {
+        setLoding(false)
+     }
+   }
+
     return (
          <Dialog open={proModel.isOpen} onOpenChange={proModel.onClose}>
             <DialogContent>
@@ -41,7 +57,10 @@ export const Promodel = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                      <Button size="lg"
+                      <Button
+                      disabled={loding}
+                      onClick={onSubscribe}
+                       size="lg"
                       variant="premium"
                       className="w-full">
                         Upgrade

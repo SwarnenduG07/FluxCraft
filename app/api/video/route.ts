@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
 import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
-import { checkSubscribtion } from "@/lib/subscription";
+import { checkSubscription } from "@/lib/subscription";
 require("dotenv").config();
 
  const replicate = new Replicate({
@@ -24,7 +24,7 @@ export async function POST(req: Request, res: Response) {
             return new NextResponse("Prompt are required", { status: 400 });
         }
         const free = await checkApiLimit()
-        const isPro = checkSubscribtion();
+        const isPro = checkSubscription();
         if  (!free && !isPro) {
             return new NextResponse("Free trial has expired", { status: 403 });
         }
