@@ -6,7 +6,8 @@ const isProtectedRoute = createRouteMatcher([
   '/music(.*)',
   '/image(.*)',
   '/code(.*)',
-  'video(.*)',
+  '/video(.*)',
+   
   
   '/pagenotfound(.*)'
 ]);
