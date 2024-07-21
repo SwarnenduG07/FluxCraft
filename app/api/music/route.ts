@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
 import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
+import { checkSubscribtion } from "@/lib/subscription";
 require("dotenv").config();
 
  const replicate = new Replicate({
@@ -23,10 +24,12 @@ export async function POST(req: Request, res: Response) {
             return new NextResponse("Prompt are required", { status: 400 });
         }
         const free = await checkApiLimit()
+        const isPro = checkSubscribtion();
 
-        if  (!free) {
-            return new NextResponse("Feww trial has expired", { status: 403 });
+        if  (!free && !isPro) {
+            return new NextResponse("Free trial has expired", { status: 403 });
         }
+
         
         const response = await replicate.run("meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb", { 
             input: {
@@ -36,7 +39,9 @@ export async function POST(req: Request, res: Response) {
                 normalization_strategy: "peak"
             }
          });
-         await increseApiLimit()
+         if (!isPro) {
+            await increseApiLimit();
+            }
          
         return NextResponse.json({audio: response})
     } catch (e: any) {

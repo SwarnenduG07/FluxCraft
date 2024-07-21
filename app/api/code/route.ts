@@ -4,6 +4,7 @@ import { OpenAI } from "openai";
 require("dotenv").config();
 
 import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
+import { checkSubscribtion } from "@/lib/subscription";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || "",
@@ -26,9 +27,10 @@ export async function POST(req: Request, res: Response) {
         }
         
         const free = await checkApiLimit()
+        const isPro = checkSubscribtion();
 
-        if  (!free) {
-            return new NextResponse("Feww trial has expired", { status: 403 });
+        if  (!free && !isPro) {
+            return new NextResponse("Free trial has expired", { status: 403 });
         }
 
         const response = await openai.chat.completions.create({
@@ -38,7 +40,9 @@ export async function POST(req: Request, res: Response) {
             model: "gpt-3.5-turbo",
         });
          
-        await increseApiLimit()
+        if (!isPro) {
+            await increseApiLimit();
+            }
 
         return NextResponse.json(response.choices[0].message);
 

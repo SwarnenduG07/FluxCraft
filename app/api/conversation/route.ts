@@ -5,7 +5,7 @@ require("dotenv").config();
 import { google } from "@ai-sdk/google"
 import { generateText } from 'ai';
 import  { checkApiLimit ,increseApiLimit } from "@/lib/api-limit";
-
+import { checkSubscribtion } from "@/lib/subscription";
 export async function POST(req: Request, res: Response) {
     try {
         const { userId } = auth();
@@ -21,9 +21,10 @@ export async function POST(req: Request, res: Response) {
         }
         
         const free = await checkApiLimit()
+        const isPro = checkSubscribtion();
 
-        if  (!free) {
-            return new NextResponse("Feww trial has expired", { status: 403 });
+        if  (!free && !isPro) {
+            return new NextResponse("Free trial has expired", { status: 403 });
         }
 
         const response = await generateText({
@@ -32,8 +33,9 @@ export async function POST(req: Request, res: Response) {
                 content: "You are a chatbot.Your answers should be precise & and simple. so that everyon can " , ...messages
             }],
           });
+          if (!isPro) {
           await increseApiLimit();
-
+          }
           return NextResponse.json(response);
     } catch (e: any) {
         console.log("Conversation Error", e);

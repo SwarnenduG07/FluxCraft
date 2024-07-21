@@ -2,7 +2,6 @@ import Stripe from "stripe";
 import { headers } from "next/headers";
 import prismadb from "@/lib/prismadb";
 import { stripe } from "@/lib/stripe";
-import { Fullscreen } from "lucide-react";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: Request) {
