@@ -18,7 +18,7 @@ export async function GET(req: Request) {
        )
     } catch(e: any) {
           console.log(e);
-        return new NextResponse(`Webhook Error: ${e.message}`, {status: 200});
+        return new NextResponse(`Webhook Error: ${e.message}`, {status: 401});
     } 
     const session = event.data.object as Stripe.Checkout.Session;
 
