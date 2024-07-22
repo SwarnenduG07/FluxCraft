@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils"
 import { UserAvater } from "@/components/user-avater"
 import { BotAvater } from "@/components/bot-avater"
 import { useProModel } from "@/app/hooks/use-pro-model"
+import toast from "react-hot-toast"
 
 const ConversationPage = () => {
     const proModel = useProModel()
@@ -47,7 +48,9 @@ const ConversationPage = () => {
         } catch (e: any) {
            if(e?.response?.status === 403)  {
                 proModel.onOpen();
-           } 
+           } else {
+              toast.error("We don't have API cradit's left.Try after some time")
+           }
            
         } finally {
             router.refresh();

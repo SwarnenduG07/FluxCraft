@@ -14,6 +14,7 @@ import { useState } from "react"
 import { Empty } from "@/components/empty"
 import { Loader } from "@/components/loader"
 import { useProModel } from "@/app/hooks/use-pro-model"
+import toast from "react-hot-toast"
 
 
 const Videopage = () => {
@@ -39,7 +40,9 @@ const Videopage = () => {
         } catch (e: any) {
             if(e?.response?.status === 403)  {
                 proModel.onOpen();
-           } 
+           } else {
+            toast.error("We don't have API cradit's left.Try after some time")
+         }
         } finally {
             router.refresh();
         }

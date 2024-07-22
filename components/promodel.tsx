@@ -10,6 +10,7 @@ import { Check, Zap } from "lucide-react"
 import { Button } from "./ui/button"
 import axios from "axios"
 import { useState } from "react"
+import toast from "react-hot-toast"
 
 
 export const Promodel = () => {
@@ -22,7 +23,7 @@ export const Promodel = () => {
          const response = await axios.get("/api/stripe")
          window.location.href = response.data.url
      } catch (e) {
-        console.log(e,"STRIPE_ERROR");
+       toast.error("Something Went Wrong!Try again some time later")
      } finally {
         setLoding(false)
      }
