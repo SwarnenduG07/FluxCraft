@@ -28,7 +28,7 @@ const routes = [
    {
       lable: "Image Genaration",
       icon: ImageIcon,
-      href: "/pagenotfound",
+      href: "/image",
       color: "text-pink-700"
    },
    {
