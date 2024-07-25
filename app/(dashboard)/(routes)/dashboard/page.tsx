@@ -40,7 +40,7 @@ import { useRouter } from "next/navigation";
       icon: Image,
       color: "text-pink-500",
       bgColor: "bg-pink-500/10",
-      href: "/pagenotfound",
+      href: "/image",
     },
     {
       lable: "Code Generation",
