@@ -53,6 +53,12 @@ STRIP API TOKEN & STRIPE_WEBHOOK_SECRET
 
 Go to [`Strip`](https://stripe.com/in)
 
+HUGGING FACE ACCES TOKEN 
+
+Go to [`Huggingface`](https://huggingface.co/)
+
+And Create an account and go to setting then access token and create you access token and put it in -.env-
+
 ## How to Download strip-cli
 
 In WINDOWS
