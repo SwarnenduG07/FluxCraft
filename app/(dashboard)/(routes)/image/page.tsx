@@ -5,7 +5,7 @@ import { Headings } from "@/components/headings"
 import { Image, MessageSquare } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { formSchema } from "./constants"
+import { amountOptions, formSchema, resolutionOptions } from "./constants"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -18,15 +18,18 @@ import { UserAvater } from "@/components/user-avater"
 import { BotAvater } from "@/components/bot-avater"
 import { useProModel } from "@/app/hooks/use-pro-model"
 import toast from "react-hot-toast"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const Music = () => {
     const proModel = useProModel()
     const router = useRouter();
-    const [messages, setMessages] = useState<any[]>([]);
+    const [images, setImages] = useState<string[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             prompt: "",
+            amount: "1",
+            resolution:"512x512"
         }
     });
 
@@ -34,16 +37,12 @@ const Music = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: any = {
-               role : "user",
-               content: values.prompt,
-            };
-            const newMessages = [...messages, userMessage];
+            setImages([])
+            const response = await axios.post("/api/image",values);
 
-            const response = await axios.post("/api/conversation", {
-                messages: newMessages,
-            })
-            setMessages((current) => [...current, userMessage, response.data]);
+         const urls = response.data.map(( image: {url : string}) =>  image.url)
+         setImages(urls)
+            
            form.reset();
         } catch (e: any) {
            if(e?.response?.status === 403)  {
@@ -88,6 +87,69 @@ const Music = () => {
                                     </FormItem>
                                 )}
                             />
+                         <FormField 
+                         control={form.control}
+                          name="amount"
+                          render={( { field }) => (
+                            <FormItem className="col-span-12 lg:col-span-6">
+                               <Select 
+                               disabled={isLoading}
+                               onValueChange={field.onChange}
+                               value={field.value}
+                               defaultValue={field.value}
+                               >
+                             <FormControl>
+                                <SelectTrigger>
+                                     <SelectValue defaultValue={field.value}/>
+                                   </SelectTrigger>
+                                 </FormControl>
+                                 <SelectContent>
+                                    {amountOptions.map((option) => (
+                                        <SelectItem 
+                                        key={option.value}
+                                        value={option.value}
+                                        >
+                                         {option.lable}
+                                        </SelectItem>
+                                    ))}
+                                 </SelectContent>
+                              </Select>
+                            </FormItem> 
+                          )}
+                         
+                         />
+                         <FormField 
+                         control={form.control}
+                          name="resolution"
+                          render={( { field }) => (
+                            <FormItem className="col-span-12 lg:col-span-6">
+                               <Select 
+                               disabled={isLoading}
+                               onValueChange={field.onChange}
+                               value={field.value}
+                               defaultValue={field.value}
+                               >
+                             <FormControl>
+                                <SelectTrigger>
+                                     <SelectValue defaultValue={field.value}/>
+                                   </SelectTrigger>
+                                 </FormControl>
+                                 <SelectContent>
+                                    {resolutionOptions.map((option) => (
+                                        <SelectItem 
+                                        value={option.value}
+                                        key={option.value}
+                                        >
+                                         {option.lable}
+                                        </SelectItem>
+                                    ))}
+                                 </SelectContent>
+                              </Select>
+                            </FormItem> 
+                          )}
+                         
+                         />
+
                            <Button className="col-span-3 lg:col-span-2 w-full" 
                            disabled={isLoading}
                            variant="premium"
@@ -99,26 +161,16 @@ const Music = () => {
                 </div>
                 <div className="space-y-4 mt-4">
                     {isLoading && (
-                     <div className="p-8 rounded-lg w-full floex items-center justify-center bg-muted">
+                     <div className="p-20">
                        <Loader />
                         </div>
                     )}
-                    {messages.length ===  0 && !isLoading && (
+                    {images.length ===  0 && !isLoading && (
                         <Empty label={"No Image generated"} />
                     )}
-                   <div className="flex flex-col-reverse gap-y-4">
-                    {messages.map((message) => (
-                        <div 
-                        key={message.content}
-                        className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10": "bg-muted")}
-                        >
-                            {message.role === "user" ? <UserAvater /> : <BotAvater />}
-                            <p className="text-sm">
-                              {message.content}
-                            </p>
-                        </div>
-                    ))}
-                   </div>
+                  <div>
+                      Image will be generated
+                  </div>
                 </div>
             </div>
         </div>
