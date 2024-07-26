@@ -49,7 +49,9 @@ export async function POST(req: Request, res: Response) {
         const buffer = Buffer.from(arrayBuffer);
         const base64Image = buffer.toString('base64'); 
     
-        
+        if (!isPro) {
+            await increseApiLimit();
+            }
 
         return NextResponse.json({ image: base64Image }, {
             headers: { "Content-Type": "application/json" },

@@ -12,18 +12,6 @@ export const amountOptions = [
       value: "1",
       lable:"1 Photo"
    },
-   {
-      value: "2",
-      lable: "2 Photo"
-   },
-   {
-      value: "3",
-      lable:"3 photos"
-   },
-   {
-      value: "4",
-      lable:"4 photos"
-   }
 ]
 
  export const resolutionOptions =[

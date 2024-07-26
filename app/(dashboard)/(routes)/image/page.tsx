@@ -48,7 +48,7 @@ const Music = () => {
             if (e?.response?.status === 403) {
                 proModel.onOpen();
             } else {
-                toast.error("Something went wrong");
+                toast.error("API Cradit's are ended Plsese wait and Try after sometime");
             }
         } finally {
             router.refresh();
@@ -148,8 +148,7 @@ const Music = () => {
                             />
                             <Button className="col-span-3 lg:col-span-2 w-full"
                                 disabled={isLoading}
-                                variant="premium"
-                            >
+                               >
                                 Generate
                             </Button>
                         </form>
@@ -164,7 +163,7 @@ const Music = () => {
                     {images.length === 0 && !isLoading && (
                         <Empty label={"No Image generated"} />
                     )}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 xl:ml-72 xl:pl-20 mt-10">
                         {images.map((src) => (
                             <Card key={src} className="rounded-lg overflow-hidden">
                                 <div className="relative aspect-square">

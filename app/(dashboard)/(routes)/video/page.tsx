@@ -81,7 +81,6 @@ const Videopage = () => {
                             />
                            <Button className="col-span-3 lg:col-span-2 w-full" 
                            disabled={isLoading}
-                           variant="premium"
                            >
                                  Genarate
                            </Button>
