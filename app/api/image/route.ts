@@ -1,19 +1,46 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-require("dotenv").config();
 import { checkApiLimit, increseApiLimit } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
+
+require("dotenv").config();
+
+// Define the structure of the request body
+interface RequestBody {
+    prompt: string;
+}
+
+// Define the structure of the error response from Hugging Face API
+interface ErrorResponse {
+    error: {
+        code: string;
+        message: string;
+    };
+}
+
+function fetchWithTimeout(
+    url: string,
+    options: RequestInit,
+    timeout: number = 10000
+): Promise<Response> {
+    return Promise.race([
+        fetch(url, options),
+        new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error('Request timed out')), timeout)
+        )
+    ]);
+}
 
 export async function POST(req: Request, res: Response) {
     try {
         const { userId } = auth();
-        const body = await req.json();
-        const { prompt } = body;
-
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 });
         }
+
+        const body: RequestBody = await req.json();
+        const { prompt } = body;
 
         if (!prompt) {
             return new NextResponse("Prompt is required", { status: 400 });
@@ -26,8 +53,11 @@ export async function POST(req: Request, res: Response) {
             return new NextResponse("Free trial has expired", { status: 403 });
         }
 
-        const response = await fetch(
-            "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
+        const modelUrl = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers";
+        const timeoutDuration = 30000; // 30 seconds
+
+        const response = await fetchWithTimeout(
+            modelUrl,
             {
                 headers: {
                     Authorization: `Bearer ${process.env.HF_API_KEY_II}`,
@@ -35,11 +65,12 @@ export async function POST(req: Request, res: Response) {
                 },
                 method: "POST",
                 body: JSON.stringify({ inputs: prompt }),
-            }
+            },
+            timeoutDuration
         );
 
         if (!response.ok) {
-            const errorDetails = await response.json();
+            const errorDetails: ErrorResponse = await response.json();
             console.error(`Hugging Face API error: ${response.statusText}`, errorDetails);
             return new NextResponse("Error generating image", { status: response.status });
         }
@@ -48,16 +79,19 @@ export async function POST(req: Request, res: Response) {
         const arrayBuffer = await blob.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
         const base64Image = buffer.toString('base64'); 
-    
+
         if (!isPro) {
             await increseApiLimit();
-            }
+        }
 
         return NextResponse.json({ image: base64Image }, {
             headers: { "Content-Type": "application/json" },
         });
     } catch (e: any) {
         console.error("Image generation error:", e);
+        if (e.message === 'Request timed out') {
+            return new NextResponse("Request timed out", { status: 504 });
+        }
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
