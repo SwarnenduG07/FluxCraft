@@ -9,6 +9,7 @@ require("dotenv").config();
 // Define the structure of the request body
 interface RequestBody {
     prompt: string;
+    models: string; // Added modelUrl to select which model to use
 }
 
 // Define the structure of the error response from Hugging Face API
@@ -31,8 +32,13 @@ function fetchWithTimeout(
         )
     ]);
 }
+const modelUrl = {
+    "RealV-Mk-1": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
+    "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
+   
+};
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
     try {
         const { userId } = auth();
         if (!userId) {
@@ -40,10 +46,14 @@ export async function POST(req: Request, res: Response) {
         }
 
         const body: RequestBody = await req.json();
-        const { prompt } = body;
+        const { prompt, models } = body;
 
         if (!prompt) {
             return new NextResponse("Prompt is required", { status: 400 });
+        }
+
+        if (!models) {
+            return new NextResponse("Model URL is required", { status: 400 });
         }
 
         const free = await checkApiLimit();
@@ -53,18 +63,17 @@ export async function POST(req: Request, res: Response) {
             return new NextResponse("Free trial has expired", { status: 403 });
         }
 
-        const modelUrl = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers";
-        const timeoutDuration = 30000; // 30 seconds
+        const timeoutDuration = 60000; // 60 seconds
 
         const response = await fetchWithTimeout(
-            modelUrl,
+            models,
             {
                 headers: {
                     Authorization: `Bearer ${process.env.HF_API_KEY_II}`,
                     "Content-Type": "application/json",
                 },
                 method: "POST",
-                body: JSON.stringify({ inputs: prompt }),
+                body: JSON.stringify({ inputs: prompt ,modelUrl }),
             },
             timeoutDuration
         );
