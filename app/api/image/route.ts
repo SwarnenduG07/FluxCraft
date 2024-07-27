@@ -30,7 +30,7 @@ export async function POST(req: Request, res: Response) {
             "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
             {
                 headers: {
-                    Authorization: `Bearer ${process.env.HF_API_KEY}`,
+                    Authorization: `Bearer ${process.env.HF_API_KEY_II}`,
                     "Content-Type": "application/json",
                 },
                 method: "POST",
