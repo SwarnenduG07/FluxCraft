@@ -35,8 +35,8 @@ const Codepage = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: any = {
-               role : "user",
+            const userMessage = {
+               role: "user",
                content: values.prompt,
             };
             const newMessages = [...messages, userMessage];
@@ -44,13 +44,19 @@ const Codepage = () => {
             const response = await axios.post("/api/code", {
                 messages: newMessages,
             })
-            setMessages((current) => [...current, userMessage, response.data]);
-           form.reset();
+
+            const botMessage = {
+                role: "model",
+                content: response.data.content,
+            };
+
+            setMessages((current) => [...current, userMessage, botMessage]);
+            form.reset();
         } catch (e: any) {
             if(e?.response?.status === 403)  {
                 proModel.onOpen();
            } else {
-            toast.error("We don't have API cradit's left.Try after some time")
+            toast.error("We don't have API credits left. Try after some time.")
          }
         } finally {
             router.refresh();
@@ -91,14 +97,14 @@ const Codepage = () => {
                            <Button className="col-span-3 lg:col-span-2 w-full" 
                            disabled={isLoading}
                            >
-                                 Genarate
+                                 Generate
                            </Button>
                         </form>
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
                     {isLoading && (
-                     <div className="p-8 rounded-lg w-full floex items-center justify-center bg-muted">
+                     <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
                        <Loader />
                         </div>
                     )}
@@ -109,18 +115,17 @@ const Codepage = () => {
                     {messages.map((message) => (
                         <div 
                         key={message.content}
-                        className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10": "bg-muted")}
+                        className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg ", message.role === "user" ? "bg-white border border-black/10": "bg-muted")}
                         >
                             {message.role === "user" ? <UserAvater /> : <BotAvater />}
                            <ReactMarkdown components= {{
-                            
                                 pre: ({node , ...props}) => (
-                                    <div className="overflwo-auto w-full my-2 bg-black/10 p-2 rounded-lg">  
+                                    <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">  
                                     <pre {...props} />     
                                     </div>
                                 ),
                                 code: ({node , ...props}) => (
-                                    <code  className="bg-black/10 rounded-lg p-1" {...props}/>
+                                    <code  className="bg-black/10 rounded-lg p-1 " {...props}/>
                                 )
                            }} className="text-sm overflow-hidden leading-7"
                            >
@@ -135,4 +140,4 @@ const Codepage = () => {
     )
 }
 
-export default Codepage
+export default Codepage;

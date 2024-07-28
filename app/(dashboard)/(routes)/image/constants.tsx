@@ -35,7 +35,7 @@ export const amountOptions = [
  export const modelsOptions = [
     {
        value:"https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
-       lable:"Stable-diffusion-3-M"
+       lable:"Model-> Stable-diffusion-3-M"
     },
    {
       value: "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
