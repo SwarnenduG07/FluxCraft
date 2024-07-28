@@ -36,8 +36,22 @@ export async function POST(req: Request, res: Response) {
 
         const chat = model.startChat({
             history: [
-                { role: "user", parts: [{ text: "Hello, I have 2 dogs in my house" }] },
-                { role: "model", parts: [{ text: "Great to meet you. What would you like to know?" }] },
+                {
+                    role: "user",
+                    parts: [{ text: "Can you help me create a React component that displays a list of items?" }],
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "Sure! Here's a React component that displays a list of items." }],
+                },
+                {
+                    role: "user",
+                    parts: [{ text: "How do I style this component using Tailwind CSS?" }],
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "You can style the component using Tailwind CSS classes like this:" }],
+                }
             ],
             generationConfig: { maxOutputTokens: 500 },
         });
@@ -47,8 +61,8 @@ export async function POST(req: Request, res: Response) {
         }
 
         const userMessage = messages[messages.length - 1].content;
-        const result = await chat.sendMessage(userMessage);
-        const response = result.response;
+        const result = await model.generateContentStream(userMessage);
+        const response = await result.response;
         const text = response.text();
 
         return NextResponse.json({ content: text });
