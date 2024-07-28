@@ -49,7 +49,7 @@ const Music = () => {
             if (e?.response?.status === 403) {
                 proModel.onOpen();
             } else {
-                toast.error("API Cradit's are ended Plsese wait and Try after sometime");
+                toast.error("Servar Gateway Timeout Plese Try Again");
             }
         } finally {
             router.refresh();
