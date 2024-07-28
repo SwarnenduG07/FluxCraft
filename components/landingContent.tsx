@@ -16,25 +16,25 @@ const testimonials = [
     {
         name: "100xDevs",
         title: "Edtech Organisation",
-        description: "Cool product Man. You have done a nice job",
+        description: "Cool product Man. You have done a nice job Specially Image Generation is top notch",
     },
     {
-        name: "Sam Altman",
+        name: "Samumdar Altman",
         title: "CEO OpenAI",
-        description: "User friendly and got a seamless experience ",
+        description: "It generated exact image as prompted &  the image quatity is top notch",
     }
 ]
 export const LandingContent = () => {
     return (
          <div className="px-10 pb-20">
-            <h2 className="text-center text-4xl text-white font-extrabold mb-10">
+            <h2 className="text-center text-4xl text-green-500 font-extrabold mb-10">
                 Testimonials
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
              {testimonials.map((item) => (
                 <Card 
                 key={item.description}
-                className="bg-[#192339] border-none text-white"
+                className="bg-[#192339] border-none text-white shadow-emerald-600/100"
                 >
                  <CardHeader >
                    <CardTitle className="flex items-center gap-x-2">
