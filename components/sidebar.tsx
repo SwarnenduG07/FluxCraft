@@ -44,7 +44,7 @@ const routes = [
       color: "text-emerald-500"
    },
    {
-      lable: "Code Genaration",
+      lable: "Code Generation",
       icon: Code,
       href: "/code",
       color: "text-green-700"

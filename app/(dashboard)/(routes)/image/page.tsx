@@ -49,7 +49,7 @@ const Music = () => {
             if (e?.response?.status === 403) {
                 proModel.onOpen();
             } else {
-                toast.error("Servar Gateway Timeout Plese Try Again");
+                toast.error("Servar Gateway Timeout Please Try Again Later");
             }
         } finally {
             router.refresh();
