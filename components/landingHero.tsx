@@ -15,10 +15,10 @@ const LandingHero = () => {
                     <TypewriterComponent 
                     options={{
                         strings: [
-                            "Chatbot",
-                            "Photo Generation",
+                            "Image Generation",
                             "Video Generation",
                             "Music Generation",
+                            "Chatbot",
                             "Code Generation",                            
                         ],
                         autoStart: true,
@@ -32,7 +32,7 @@ const LandingHero = () => {
                 </div>
              <div>
                 <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-                  <Button variant={"outline"} className="md:text-lg p-4 md:p-6 rounded-full font-semibold">
+                  <Button  className="md:text-lg p-4 md:p-6 transition ease-in-out delay-100 bg-gradient-to-r from-lime-500 to-pink-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 rounded-full scale-100">
                     Start Generating For Free
                    </Button>
                 </Link>

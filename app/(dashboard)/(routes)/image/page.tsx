@@ -6,7 +6,7 @@ import { Download, ImageIcon } from "lucide-react"
 import Image from 'next/image'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { amountOptions, formSchema, resolutionOptions } from "./constants"
+import { amountOptions, formSchema, modelsOptions, resolutionOptions } from "./constants"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -29,7 +29,8 @@ const Music = () => {
         defaultValues: {
             prompt: "",
             amount: "1",
-            resolution: "512x512"
+            resolution: "512x512",
+            models: modelsOptions[0].value
         }
     });
 
@@ -48,7 +49,7 @@ const Music = () => {
             if (e?.response?.status === 403) {
                 proModel.onOpen();
             } else {
-                toast.error("API Cradit's are ended Plsese wait and Try after sometime");
+                toast.error("Servar Gateway Timeout Please Try Again Later");
             }
         } finally {
             router.refresh();
@@ -74,7 +75,7 @@ const Music = () => {
                             <FormField
                                 name="prompt"
                                 render={({ field }) => (
-                                    <FormItem className="col-span-12 lg:col-span-10">
+                                    <FormItem className="col-span-12 lg:col-span-6">
                                         <FormControl className="p-0 m-0">
                                             <Input
                                                 {...field}
@@ -90,7 +91,7 @@ const Music = () => {
                                 control={form.control}
                                 name="amount"
                                 render={({ field }) => (
-                                    <FormItem className="col-span-12 lg:col-span-6">
+                                    <FormItem className="col-span-12 lg:col-span-2">
                                         <Select
                                             disabled={isLoading}
                                             onValueChange={field.onChange}
@@ -105,8 +106,38 @@ const Music = () => {
                                             <SelectContent>
                                                 {amountOptions.map((option) => (
                                                     <SelectItem
-                                                        key={option.value}
-                                                        value={option.value}
+                                                       key={option.value}
+                                                      value={option.value}
+                                                    >
+                                                        {option.lable}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="models"
+                                render={({ field }) => (
+                                    <FormItem className="col-span-12 lg:col-span-2">
+                                        <Select
+                                            disabled={isLoading}
+                                            onValueChange={field.onChange}
+                                            value={field.value}
+                                            defaultValue={field.value}
+                                        >
+                                            <FormControl>
+                                                <SelectTrigger>
+                                                    <SelectValue defaultValue={field.value} />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                {modelsOptions.map((option) => (
+                                                    <SelectItem
+                                                    key={option.value}
+                                                    value={option.value}
                                                     >
                                                         {option.lable}
                                                     </SelectItem>
@@ -120,7 +151,7 @@ const Music = () => {
                                 control={form.control}
                                 name="resolution"
                                 render={({ field }) => (
-                                    <FormItem className="col-span-12 lg:col-span-6">
+                                    <FormItem className="col-span-12 lg:col-span-2">
                                         <Select
                                             disabled={isLoading}
                                             onValueChange={field.onChange}
@@ -146,6 +177,7 @@ const Music = () => {
                                     </FormItem>
                                 )}
                             />
+                            
                             <Button className="col-span-3 lg:col-span-2 w-full"
                                 disabled={isLoading}
                                >

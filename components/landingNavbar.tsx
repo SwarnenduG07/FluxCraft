@@ -31,9 +31,9 @@ export const LandingNavBar = () => {
                </h1>
             </Link>
             <div className="flex items-center gap-x-2">
-                <DarkModeToggle />
+                <DarkModeToggle/>
               <Link href={isSignedIn? "/dashboard" : "/sign-up" }>
-                <Button variant={"outline"} className="rounded-full">
+                <Button  className="rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50 mr-4 ml-2 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 duration-300 hover:bg-violet-400">
                        Get Started
                 </Button>
               </Link>
