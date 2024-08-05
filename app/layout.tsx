@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ModelProvider } from "@/components/model-provideo";
 import { ToasterProvider } from "@/components/toster-provider";
 import { CrispProvider } from "@/components/crisp-provide";
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,23 +21,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-      <CrispProvider />
-        <body className={inter.className}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          > 
-             <ModelProvider />
-             <ToasterProvider />
-             
-            {children}
-       </ThemeProvider>
-        </body>
-      </html>
-   </ClerkProvider>
+      <ClerkProvider>
+        <Analytics />
+         <html lang="en">
+          <CrispProvider />
+           <body className={inter.className}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            > 
+              <ModelProvider />
+              <ToasterProvider />
+              {children}
+           </ThemeProvider>
+          </body>
+        </html>
+     </ClerkProvider>
   );
 }
