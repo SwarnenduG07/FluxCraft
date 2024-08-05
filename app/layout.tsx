@@ -7,6 +7,7 @@ import { ModelProvider } from "@/components/model-provideo";
 import { ToasterProvider } from "@/components/toster-provider";
 import { CrispProvider } from "@/components/crisp-provide";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
       <ClerkProvider>
         <Analytics />
+        <SpeedInsights/>
          <html lang="en">
           <CrispProvider />
            <body className={inter.className}>
