@@ -24,10 +24,30 @@ This project uses [`shadcn`](https://ui.shadcn.com/) for UI's.
 
 # For Local Development
 
+```
+git clone  https://github.com/SwarnenduG07/FluxCraft.git
+```
+
 Go to the project directory and do
 
  ```bash
 npm install
+
+npm run dev
+```
+
+## For Docker
+
+### To start the project
+
+```
+  docker compose up
+```
+
+### To stop the project
+
+```
+docker compose down
 ```
 
 ### Next Step

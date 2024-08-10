@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:9.6
+    container_name: fluxdb
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: flucdb
+    ports: 
+      - "5432:5432"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  fluxcraft-1:
+    image: swarnendug07/fluxcraft 
+    container_name: fluxcraft_app
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+     - "3000:3000"
