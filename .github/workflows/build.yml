@@ -1,0 +1,25 @@
+name: Build On PR
+
+on : 
+    pull_request:
+        branches:
+          - main
+
+jobs: 
+    build:
+        runs-on: ubuntu-latest
+        steps: 
+          - uses: actions/checkout@v3
+          - name: Use Node.js
+            uses: actions/setup-node@v3
+            with: 
+                node-version: '20'
+               
+          - name: Install Deps
+            run: npm install
+            
+          -  name: Generate Prisma
+             run: npm run db:geneate
+
+          -  name: Run build
+             run: npm run build
