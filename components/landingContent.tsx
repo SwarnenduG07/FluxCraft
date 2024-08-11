@@ -4,7 +4,7 @@ import { Description } from "@radix-ui/react-dialog"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 const testimonials = [
     {
-        name: "Harkirat Sing",
+        name: "hkirat",
         title: "Full-Stack + web3 sr.Engineer",
         description: "This is the best application I am using now a days. This website works seamlessly",
     },
@@ -14,8 +14,8 @@ const testimonials = [
         description: "I am using this in my daily life now. In terms of Frontend this looks really good",
     },
     {
-        name: "100xDevs",
-        title: "Edtech Organisation",
+        name: "Pat",
+        title: "FULLStack Dev",
         description: "Cool product Man. You have done a nice job Specially Image Generation is top notch",
     },
     {
