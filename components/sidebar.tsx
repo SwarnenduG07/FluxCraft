@@ -34,13 +34,13 @@ const routes = [
    {
       lable: "Video Genaration",
       icon: VideoIcon,
-      href: "/video",
+      href: "/pagenotfound",
       color: "text-sky-500"
    },
    {
       lable: "Music Genaration",
       icon: Music4Icon,
-      href: "/music",
+      href: "/pagenotfound",
       color: "text-emerald-500"
    },
    {

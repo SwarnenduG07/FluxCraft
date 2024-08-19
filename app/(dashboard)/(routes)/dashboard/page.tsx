@@ -26,14 +26,14 @@ import { useRouter } from "next/navigation";
       icon: Music,
       color: "text-emerald-500",
       bgColor: "bg-emerald-500/10",
-      href: "/music",
+      href: "/pagenotfound",
     },
     {
       lable: "Video Generation",
       icon: Video,
       color: "text-sky-500",
       bgColor: "bg-sky-500/10",
-      href: "/video",
+      href: "/pagenotfound",
     },
     {
       lable: "Image Generation",
