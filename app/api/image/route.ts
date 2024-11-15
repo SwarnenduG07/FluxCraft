@@ -6,10 +6,10 @@ import { checkSubscription } from "@/lib/subscription";
 
 require("dotenv").config();
 
-// Define the structure of the request body
+
 interface RequestBody {
     prompt: string;
-    models: string; // Added modelUrl to select which model to use
+    models: string; 
 }
 
 // Define the structure of the error response from Hugging Face API
@@ -34,7 +34,8 @@ function fetchWithTimeout(
 }
 const modelUrl = {
     "RealV-Mk-1": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
-    "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
+    "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3.5-large-turbo",
+    "Flux V1": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
    
 };
 

@@ -34,11 +34,15 @@ export const amountOptions = [
 
  export const modelsOptions = [
     {
-       value:"https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
+       value:"https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3.5-large-turbo",
        lable:"Model-> Stable-diffusion-3-M"
     },
    {
       value: "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
       lable: "RealV-Mk-1"
+   },
+   {
+      value: "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev",
+      lable: "Flux V1"
    },
  ]

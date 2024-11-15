@@ -25,16 +25,16 @@ export const FreeCounter = ({apiLimitCount = 0, isPro = false}: FreeCounterProps
         return null
     }
     return (
-        <div className="px-3">
+        <div className="py-52">
             <Card className="bg-white/10 border-0">
-                <CardContent className="py-6">
+                <CardContent className="py-5">
                     <div className="text-center text-sm text-white mb-4 space-y-2">
                         <p>
                            {apiLimitCount} / {MAX_FREE_COUNTS} Free Generations
                            <Progress  className="h-3" value={(apiLimitCount / MAX_FREE_COUNTS) * 100}/>
                         </p>
                     </div>
-                    <Button onClick={proModel.onOpen} className="w-full" variant="premium">
+                     <Button onClick={proModel.onOpen} className="w-full" variant="premium">
                         Upgrade
                         <Zap className="w-4 h-4 ml-2 fill-white"/>
                     </Button>

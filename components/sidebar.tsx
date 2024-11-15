@@ -84,15 +84,15 @@ const SideBar = ({ apiLimitCount = 0, isPro = false}: SidebarProps) => {
 
                      )}
                      >
-                     <div className="flex items-center flex-1">
+                     <div className="flex items-center flex-1 bg0">
                         <route.icon className={cn ("h-5 w-5 mr-3", route.color)}/>
                         {route.lable}
                      </div>
                      </Link>
                   ))}
                 </div>
+                 <FreeCounter  isPro={isPro} apiLimitCount ={apiLimitCount}/>
              </div>
-             <FreeCounter isPro={isPro} apiLimitCount ={apiLimitCount}/>
         </div>
     )
 }
