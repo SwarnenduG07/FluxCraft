@@ -38,11 +38,15 @@ export const amountOptions = [
        lable:"Model-> Stable-diffusion-3-M"
     },
    {
-      value: "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
+      value: "https://api-inference.huggingface.co/models/DiegoJR1973/NSFW-TrioHMH-Flux",
       lable: "RealV-Mk-1"
    },
    {
       value: "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev",
       lable: "Flux V1"
+   },
+   {
+      value: "https://api-inference.huggingface.co/models/prithivMLmods/Fashion-Hut-Modeling-LoRA",
+      lable: "Lora-V1"
    },
  ]

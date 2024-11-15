@@ -33,9 +33,10 @@ function fetchWithTimeout(
     ]);
 }
 const modelUrl = {
-    "RealV-Mk-1": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
+    "RealV-Mk-1": "https://api-inference.huggingface.co/models/DiegoJR1973/NSFW-TrioHMH-Flux",
     "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3.5-large-turbo",
-    "Flux V1": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
+    "Flux V1": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev",
+    "Lora- M1": "https://api-inference.huggingface.co/models/prithivMLmods/Fashion-Hut-Modeling-LoRA"
    
 };
 
