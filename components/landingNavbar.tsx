@@ -26,7 +26,7 @@ export const LandingNavBar = () => {
                 src="/logo.png"
                 />   
                </div>
-               <h1 className={cn("text-2xl fonr-bold text-white" , font.className)}>
+               <h1 className={cn("text-2xl fonr-bold text-gray-800 dark:text-white" , font.className)}>
                 FluxCraft
                </h1>
             </Link>
